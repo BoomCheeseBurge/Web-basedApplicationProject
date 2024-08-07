@@ -1,0 +1,11 @@
+- Student or Faculty Member cancels their grant proposal (Maybe?)
+
+- What happens when reviewer 3 accepts the grant proposal?
+
+- What happens when either reviewer rejects the grant proposal?
+
+- Separate PHP, HTML, and CSS files into its own folders (for better organization).
+
+- If the same information is used in the edit proposal, then no query is needed.
+
+- Else if the research title or publication type or file upload is updated, then only query those updated inputs

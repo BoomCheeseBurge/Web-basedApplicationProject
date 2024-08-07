@@ -1,0 +1,990 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background-image: url('../IMG/kelly-sikkema_unsplash.jpg');
+    /*Image used is credited to https://unsplash.com/photos/Nlax2tu89bU*/
+    background-size: cover;
+}
+
+/* ***************************************** */
+/* **************** NAVBAR  **************** */
+/* ***************************************** */
+
+header .index {
+    font-size: 20px;
+    color: #F9F1F0;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+header .index:hover {
+    color: #F2CBF2;
+}
+
+nav {
+    width: 100%;
+    padding: 20px 50px;
+    background: #464649;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    width: 100%;
+}
+
+.menu-bar {
+    margin: 0;
+}
+
+.menu-bar li:first-child {
+    margin-right: auto;
+}
+
+nav ul .header-nav .active {
+    color: #525655;
+    background-color: #F9F1F0;
+    font-weight: 600;
+    transition: 0.3s;
+    border-radius: 30px;
+    text-decoration: none;
+}
+nav ul .header-nav .active:hover {
+    background: #ecccc8;
+}
+
+/* For Login section */
+nav ul .header-nav {
+    position: relative;
+    text-decoration: none;
+    margin-left: 40px;
+}
+
+nav ul .header-nav .login-section {
+    padding: 10px 18px;
+    color: #F9F1F0;
+    font-weight: 600;
+    transition: 0.3s;
+    border-radius: 30px;
+    text-decoration: none;
+}
+nav ul .header-nav .login-section:hover {
+    color: #525655;
+    background: #F9F1F0;
+}
+
+/* ------------------------------------ */
+
+/* For User section */
+nav ul .header-nav .user-section {
+    color: #F9F1F0;
+    display: block;
+    margin: 0 2px;
+    font-weight: 600;
+    padding: 25px 18px;
+    transition: 0.3s;
+    border-radius: 30px;
+    text-decoration: none;
+}
+nav ul .header-nav .user-section:hover {
+    color: #525655;
+    background: #F2CBF2;
+}
+
+.myuser {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: coral;
+    background: none;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.5s ease;
+    cursor: pointer;
+}
+
+.myuser:hover {
+    color: #1e1f26;
+    background: coral;
+    border-radius: 5px;
+}
+
+.logout {
+    font-size: 15px;
+    color: coral;
+    background: none;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.5s ease;
+    cursor: pointer;
+}
+
+.logout:hover {
+    text-decoration: underline;
+    text-decoration-color: coral;
+}
+/* ---------------------------- */
+
+nav ul .header-nav .active {
+    color: #525655;
+    background-color: #EED6D3;
+}
+nav ul .header-nav .active:hover {
+    background-color: #F9F1F0;
+}
+
+/* ------------------------------------------------------------------------------------ */
+
+
+/* ***************************************** */
+/* **************** SIDEBAR  **************** */
+/* ***************************************** */
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 300px;
+    z-index: 99;
+    background-color: rgba(116, 116, 116, 0.9);
+    backdrop-filter: blur(10px);
+    box-shadow: -10px 0 10px rgba(0, 0, 0, 0.1);
+    display: none;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.sidebar li,
+.sidebar a {
+    width: 100%;
+    margin-top: 30px;
+}
+
+.menu-button {
+    display: none;
+}
+
+@media(max-width:800px) {
+    .menu-button {
+        display: block;
+    }
+    .hideOnMobile {
+        display: none;
+    }
+}
+@media(max-width:400px) {
+    .sidebar {
+        width: 100%;
+    }
+}
+
+/* ------------------------------------------------------------------------------------ */
+
+/* *********************************************** */
+/* **************** LOGIN POPUP   **************** */
+/* *********************************************** */
+
+/* Login Button on Navbar */
+nav .loginpopup {
+    width: 130px;
+    height: 50px;
+    background: transparent;
+    border: 2px solid #fff;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.1em;
+    color: coral;
+    border-color: coral;
+    font-weight: bold;
+    margin-left: 40px;
+    transition: 0.5s;
+}
+
+nav .loginpopup:hover {
+    background-color: coral;
+    color: #1e1f26;
+}
+
+/* Login Wrapper */
+
+/* Overlay */
+
+/* To hide and show the login popup */
+.overlay {
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    position: fixed;
+    top: 90px;
+    right: 150px;
+    background-color: rgba(0, 0, 0, 0);
+    z-index: 999;
+    transition: 0.2s;
+}
+
+.overlay:target {
+    width: 25em;
+    height: 27.5em;
+    border-radius: 20px;
+    top: 90px;
+    right: 150px;
+    background-color: rgba(30, 31, 38, 0.4);
+    animation: zoom-n-fade 1s forwards;
+}
+
+/* Incorrect Login */
+.wrapper .login-box .error-msg{
+    margin: 5px;
+    background: crimson;
+    color:#fff;
+    border-radius: 5px;
+    font-size: 18px;
+    display: block;
+    text-align: center;
+}
+
+/* Zoom-in Animation */
+@keyframes zoom-n-fade {
+    0% {transform: scale(0); opacity: 0;}
+
+    100% {transform: scale(1); opacity: 1;}
+}
+
+/* ----------------------------------------- */
+
+/* This has overlay */
+.overlay .wrapper {
+    position: relative;
+    width: 25em;
+    height: 27.5em;
+    background: transparent;
+    border: 2px solid #F9F1F0;
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    /* transform: scale(0); */
+    transition: height 0.2s ease;
+}
+
+/* This has overlay */
+.overlay .wrapper .active {
+    height: 520px;
+}
+
+/* This has overlay */
+.overlay .wrapper .login-box {
+    width: 100%;
+    padding: 40px;
+}
+
+.login-box h2 {
+    font-size: 2em;
+    color: #F2CBF2;
+    text-align: center;
+}
+
+.input-box {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    border-bottom: 2px solid #1e1f26;
+    margin: 30px 0;
+}
+
+.input-box label {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    font-size: 1em;
+    color: #F2CBF2;
+    font-weight: 500;
+    pointer-events: none;
+    transition: top 0.5s ease;
+}
+
+.input-box input:focus~label,
+.input-box input:valid~label {
+    top: -5px;
+}
+
+.input-box input {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    color: #F2CBF2;
+    font-weight: 600;
+}
+
+.input-box .icon {
+    position: absolute;
+    right: 8px;
+    font-size: 1.2em;
+    color: #F2CBF2;
+    line-height: 57px;
+}
+
+.login-btn {
+    width: 100%;
+    height: 45px;
+    background: #182064;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    color: #F2CBF2;
+    font-weight: 500;
+    transition: color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.login-btn:hover,
+.login-btn:focus,
+.login-btn:active{
+    color: #F2CBF2;
+    font-weight: bold;
+    background: #1f265e;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    transform: scale(1.05);
+    border-color: transparent;
+}
+
+/* This has overlay */
+.overlay .wrapper .close-wrapper {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 45px;
+    height: 45px;
+    background: #acd4e7;
+    font-size: 2em;
+    color: #F2CBF2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom-left-radius: 20px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+/* ------------------------------------------------------------------------------------ */
+
+/* ************************************************************************ */
+/* ******************************* HOMEPAGE ******************************* */
+/* ************************************************************************ */
+
+/* Basic styles */
+.box1,
+.box1::before,
+.box1::after {
+    box-sizing: border-box;
+}
+
+h1{
+    font-size: 3em;
+    font-weight: normal;
+    font-family: 'Maitree', serif;
+}
+
+/* title styles */
+.home-title span{
+    position: relative;
+    overflow: hidden;
+    display: block;
+    line-height: 1.2;
+}
+
+.home-title span::after{
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    animation: a-ltr-after 2s cubic-bezier(.77,0,.18,1) forwards;
+    transform: translateX(-101%);
+}
+
+.home-title span::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-color);
+    animation: a-ltr-before 2s cubic-bezier(.77,0,.18,1) forwards;
+    transform: translateX(0);
+}
+
+.home-title span:nth-of-type(1)::before,
+.home-title span:nth-of-type(1)::after{
+    animation-delay: 1s;
+}
+
+.home-title span:nth-of-type(2)::before,
+.home-title span:nth-of-type(2)::after{
+    animation-delay: 1.5s;
+}
+
+@keyframes a-ltr-after{
+    0% {transform: translateX(-100%)}
+    100% {transform: translateX(101%)}
+}
+
+@keyframes a-ltr-before{
+    0% {transform: translateX(0)}
+    100% {transform: translateX(200%)}
+}
+
+/* -------------------------------- */
+
+.btn-style {
+    margin: auto;
+	border-radius: 20px;
+    width: 300px;
+	height: 100px;
+    border: none;
+    background-color: #F2CBF2;
+    margin-top: 3rem;
+}
+
+
+.apply-btn {
+	margin: auto;
+	border-radius: 20px;
+	box-shadow: 10px 15px 40px coral;
+	width: 300px;
+	height: 100px;
+	font-size: 50px;
+	font-family: cambria;
+	color: #bccad6;
+	border: none;
+}
+
+.apply-btn:hover {
+	border: none;
+	background-color: #36486b;
+	opacity: 1;
+	color: #36486b;
+}
+
+.apply-btn:hover {
+	transition: 0.5s ease-in-out;
+	background: coral;
+}
+
+.apply-btn {
+	--color1: #36486b;
+	--color2: #f9f1f0;
+	font-family: cambria;
+	text-align: center;
+	font-size: 46px;
+	background: repeating-linear-gradient(
+		45deg,
+		var(--color1),
+		var(--color1) 30px,
+		var(--color2) 30px,
+		var(--color2) 60px
+	);
+	background-clip: text;
+	color: transparent;
+	-webkit-background-clip: text;
+	animation: 40s linear 0s infinite move;
+}
+
+@keyframes move {
+	from {
+		background-position: 0px;
+	}
+
+	to {
+		background-position: 1000px;
+	}
+}
+
+/* Media Queries */
+@media screen and (max-width: 768px) {
+	.apply-btn {
+		width: 200px;
+		height: 80px;
+		font-size: 40px;
+	}
+
+	.apply-btn:hover {
+		background-color: #36486b;
+	}
+
+	.apply-btn:hover {
+		background: coral;
+	}
+
+	.apply-btn {
+		font-size: 36px;
+	}
+
+	@keyframes move {
+		from {
+			background-position: 0px;
+		}
+
+		to {
+			background-position: 500px;
+		}
+	}
+}
+
+/* ------------------------------------------------------------------------------------ */
+
+/* *************************************************************** */
+/* ****************     GRANT REGISTRATION FORM   **************** */
+/* *************************************************************** */
+
+.form-bg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    /* background: linear-gradient(135deg, #525655, #80817c); */
+}
+
+.form-holder {
+    background: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    width: 45%;
+}
+
+.form-holder #form-title {
+    font-size: 20px;
+    font-weight: 500px;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+/* Aesthetic line at the bottom of heading1 title */
+.form-holder #form-title::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 40px;
+    background: linear-gradient(155deg, #80817c, #1e1f26);
+}
+
+/* FORM */
+.form-holder form .application-details {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 0 50px;
+}
+
+form .application-details .text-box {
+    margin-bottom: 15px;
+    width: calc(100% / 2 - 40px);
+}
+
+form .application-details .nontext-box {
+    margin: 15px 0 10px 0;
+    width: calc(100% / 2 - 50px);
+}
+
+.application-details label {
+    display: block;
+    font-weight: 500px;
+    margin-bottom: 12px;
+    font-size: 20px;
+    font-weight: bold;
+
+}
+
+/* TEXT INPUT */
+.application-details .text-box input {
+    height: 40px;
+    width: 75%;
+    font-size: 16px;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding-left: 15px;
+    border-bottom-width: 2px;
+    transition: all 0.3s ease;
+}
+
+/* After-click effect on the textbox border */
+.application-details .text-box input:hover,
+.application-details .text-box input:focus,
+.application-details .text-box input:valid {
+    border-color: #1e1f26;
+}
+
+/* NONTEXT INPUT */
+.application-details .nontext-box input {
+    height: 40px;
+    outline: none;
+    padding-left: 15px;
+}
+
+/* DROPDOWN LIST */
+.application-details .nontext-box .select {
+    position: relative;
+    display: flex;
+    width: 250px;
+    height: 32px;
+    line-height: 2;
+    /* background: #1e1f26; */
+    background: #ededed;
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+.application-details .nontext-box .select::after {
+    content: '\25BC';
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0 16px;
+    background: #7d8182;
+    cursor: pointer;
+    pointer-events: none;
+    transition: all 0.5s ease;
+}
+
+.application-details .nontext-box .select:hover::after {
+    color: #F2CBF2;
+}
+
+.application-details .nontext-box .select select {
+
+    flex: 1;
+    padding: 0 16px;
+    color: #525655;
+    font-size: 13.6px;
+    font-weight: bold;
+    cursor: pointer;
+    outline: none;
+    box-shadow: none;
+    border: none;
+    background: #b1b2ad;
+}
+
+/* SUBMIT BUTTON */
+form .submit-button {
+    display: flex;
+    justify-content: center;
+    height: 60px;
+    margin: 45px 0 25px 0;
+}
+
+form .submit-button input {
+    height: 100%;
+    width: 70%;
+    outline: none;
+    color: #fff;
+    font-size: 18px;
+    letter-spacing: 1px;
+    border: none;
+    border-radius: 5px;
+    background: linear-gradient(135deg, #525655, #80817c);
+    border: 2px solid rgba(#ccc, 0.6);
+    text-decoration: none;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+form .submit-button input:hover,
+form .submit-button input:focus,
+form .submit-button input:active{
+    color: #1e1f26;
+    font-weight: bold;
+    background: linear-gradient(-135deg, #ccc, #525655);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    transform: scale(1.05);
+    border-color: transparent;
+}
+
+/* WEB RESPONSIVE */
+@media (max-width: 580px) {
+
+    form .application-details .text-box {
+        margin-bottom: 15px;
+        width: 100%;
+    }
+    form .application-details .nontext-box {
+        margin: 15px 0 10px 0;
+        width: 100%;
+    }
+
+    .application-details .nontext-box .select {
+        width: 100%;
+    }
+    .container form .application-details {
+        max-height: 300px;
+        overflow-y: scroll;
+    }
+    .application-details::-webkit-scrollbar {
+        width: 0;
+    }
+}
+
+/* ------------------------------------------------------------------------------------ */
+
+/* *********************************************** */
+/* **************** GRANT PROGESS **************** */
+/* *********************************************** */
+
+/* Main */
+.grant-progress {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 89.3vh;
+    background-color: rgb(212, 211, 205);
+}
+
+/* Button Wrapper */
+.button-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* HERO */
+section#hero {
+    position: relative;
+    margin-top: 40px;
+    margin-left: 130px;
+    text-align: left;
+    color: #F9F1F0;
+    z-index: 1;
+}
+
+.applygrant {
+    font-size: 50px;
+    color: coral;
+    background: darkslategray;
+    outline: none;
+    border-radius: 5px;
+    border-color: coral;
+    border-width: 3px;
+    padding: 8px;
+    font-weight: bold;
+    transition: color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+}
+
+.applygrant:hover,
+.applygrant:focus,
+.applygrant:active {
+    box-shadow: 0 0 20px rgba(255, 127, 80, 0.5);
+    transform: scale(1.05);
+    border-color: transparent;
+}
+
+.hero2 {
+    position: relative;
+    height: 60px;
+    width: 600px;
+    padding-top: 5px;
+    border-radius: 5px;
+    text-align: center;
+    color: #F9F1F0;
+    background: green;
+}
+
+/* Progress Bar */
+.bar-wrapper {
+    width: 30%;
+    height: 75%;
+    font-family: 'Roboto', sans-serif;
+}
+
+.bar-wrapper .app-name,
+.bar-wrapper .pub-type,
+.bar-title {
+    text-align: center;
+    margin-top: 20px;
+    background-color:rgba(255, 127, 80, 0.7);
+    border-radius: 10px;
+}
+
+.skill {
+    margin-bottom: 20px;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.skill>p {
+    margin: 10px 0;
+    font-size: 1.2em;
+    font-weight: 700;
+    color: #1a1716;
+}
+
+.skill:before {
+    width: 100%;
+    height: 25px;
+    content: "";
+    display: block;
+    position: absolute;
+    background: #959595;
+    bottom: 0;
+}
+
+.skill-bar {
+    width: 100%;
+    height: 25px;
+    /* background: turquoise; */
+    display: block;
+    position: relative;
+}
+
+.skill-bar span {
+    position: absolute;
+    /* border-top: 5px solid #f4392f; */
+    top: -30px;
+    /* padding: 0; */
+    font-size: 18px;
+    /* padding: 3px 0; */
+    font-weight: 500;
+}
+
+.skill-bar {
+    position: relative;
+}
+
+.skill1 {
+    width: 0%;
+}
+
+.skill1 .skill-count1 {
+    right: 0;
+}
+
+.skill2 {
+    width: 0%;
+}
+
+.skill2 .skill-count2 {
+    right: 0;
+}
+
+.skill3 {
+    width: 0%;
+}
+
+.skill3 .skill-count3 {
+    right: 0;
+}
+
+/* ------------------------------------------------------------------------------------ */
+
+/* *************************************************** */
+/* ****************** REVIEWER PAGE ****************** */
+/* *************************************************** */
+
+.reviewer-container {
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.reviewer-container h1 {
+    color: rgb(13, 13, 14);
+    text-shadow: 1px 1px 10px rgb(255, 255, 255);
+}
+
+tr {
+    text-align: center;
+}
+
+/* Bootstrap 5 Modification */
+.proposalfile i:nth-child(2) {
+    display: none; 
+  }
+  
+.proposalfile:hover i:nth-child(1) {
+display: none;
+}
+  
+.proposalfile:hover i:nth-child(2) {
+display: block;
+}
+
+.badge1:hover, .badge1:focus {
+    color: #28a745 !important;
+    background-color: #f8f9fa !important;
+  }
+  
+.badge2:hover, .badge2:focus {
+    color: #eea333 !important;
+    background-color: #f8f9fa !important;
+}
+  
+.badge3:hover, .badge3:focus {
+    color: #dc3545 !important;
+    background-color: #f8f9fa !important;
+}
+
+.disabled-link1 {
+    pointer-events: none;
+    color: #d9d9d9 !important;
+    background-color: #238138 !important;
+    /* Optional styling to indicate that the link is disabled */
+    text-decoration: none;
+    cursor: default;
+}
+
+.disabled-link2 {
+    pointer-events: none;
+    color: #d9d9d9 !important;
+    background-color: #0963c4 !important;
+    /* Optional styling to indicate that the link is disabled */
+    text-decoration: none;
+    cursor: default;
+}
+
+.disabled-link3 {
+    pointer-events: none;
+    color: #d9d9d9 !important;
+    background-color: #a72b37 !important;
+    /* Optional styling to indicate that the link is disabled */
+    text-decoration: none;
+    cursor: default;
+}
+
+.custom-tooltip {
+    --bs-tooltip-bg: var(--bs-primary);
+}
+
+.btn-primary {
+    cursor: default !important;
+}
+
+/* ------------------------------------------------------------------------------------ */
